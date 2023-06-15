@@ -1,0 +1,56 @@
+#%RAML 1.0
+title: Retrive-Consolidated-RoutesAndSchedules-PAPI
+description: This RAML will retrive consolidtaed routes and schedules for Process API
+
+mediaType: application/json
+version: 1.0.0
+baseUri: https://localhost:8081/api/v1
+protocols: [HTTP, HTTPS]
+
+uses:
+  common: /libraries/commonBusiness-library.raml   
+
+types:
+  routesData: !include /libraries/routes/dataTypes/routesData.raml
+  schedulesData: !include /libraries/schedules/dataTypes/schedulesData.raml
+
+/health:
+  get:
+    is: [common.errorResponses ]
+    responses:
+      200:
+        body:
+          type: object
+          example:
+            {
+              "Status" : "Running"
+            }
+
+/booking:
+  /{transportType}:
+    /routes:
+      get:
+        is: [common.errorResponses, common.transactionId, common.companyName, common.departureLocation, common.destinationLocation]
+        responses:
+          200:
+            body:
+              type: routesData
+              example: !include /libraries/routes/examples/routes.json
+
+    /schedules:
+       get:
+         is : [common.errorResponses, common.transactionId, common.companyName, common.departureLocation, common.destinationLocation, common.requestTimezone]
+         responses:
+           200:
+             body:
+               type: schedulesData
+               example: !include /libraries/schedules/examples/schedules.json
+               
+          
+        
+          
+
+
+
+
+      

@@ -1,0 +1,46 @@
+#%RAML 1.0 DataType
+type: array
+items:
+  type: object
+  properties:
+    companyName:
+      type: string
+      example: TravelOnTip
+      required: true
+    availableSeats:
+      type: integer
+      example: 20
+      required: true
+    departureDateTime:
+      type: datetime-only
+      example: '2019-04-30T16:41:41'
+      required: true
+    travel Route:
+      type: object
+      properties:
+        destinationLocation:
+          type: object
+          properties:
+            locationCode:
+              type: string
+              example: KLG-MY
+              required: true
+            locationDesc:
+              type: string
+              example: Klang Malaysia
+              required: true
+        originLocation:
+          type: object
+          properties:
+            locationCode:
+              type: string
+              example: BEN-SG
+              required: true
+            locationDesc:
+              type: string
+              example: Beauna Vista Singapore
+              required: true
+
+                  
+            
+            

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core"
+	xmlns:os="http://www.mulesoft.org/schema/mule/os"
+	xmlns:apikit="http://www.mulesoft.org/schema/mule/mule-apikit"
+	xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns="http://www.mulesoft.org/schema/mule/core"
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="
+http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd 
+http://www.mulesoft.org/schema/mule/mule-apikit http://www.mulesoft.org/schema/mule/mule-apikit/current/mule-apikit.xsd 
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/os http://www.mulesoft.org/schema/mule/os/current/mule-os.xsd">
+	<http:listener-config name="retrive-consolidated-routesandschedules-xpapi-httpListenerConfig">
+        <http:listener-connection host="${http.listener.host}" port="${http.listener.port}" />
+    </http:listener-config>
+    <apikit:config name="retrive-consolidated-routesandschedules-xpapi-config" api="retrive-consolidated-routesandschedules-xpapi.raml" outboundHeadersMapName="outboundHeaders" httpStatusVarName="httpStatus" />
+    <http:request-config name="HTTP_Request_configuration_TravelOnTip_SAPI" doc:name="HTTP Request configuration" doc:id="fa9c4c57-397e-47d6-9b2d-f59f5941adaf" >
+		<http:request-connection host="${http.request.TravelOnTip.host}" port="${http.request.TravelOnTip.port}" />
+	</http:request-config>
+	<http:request-config name="HTTP_Request_configuration_FastGo_SAPI" doc:name="HTTP Request configuration" doc:id="a56c30f9-af1a-4571-9c95-09e502db9d73" >
+		<http:request-connection host="${http.request.FastGo.host}" port="${http.request.FastGo.port}" />
+	</http:request-config>
+	<configuration-properties doc:name="Configuration properties" doc:id="9bec7a0b-58a1-4b93-89d7-eeb64e5b9f1b" file="config/${MULE_ENV}.yaml" />
+	<global-property doc:name="Global Property" doc:id="62688334-7a07-4d7f-8a49-473310e557c3" name="MULE_ENV" value="local" />
+	<configuration doc:name="Configuration" doc:id="a9e66ad8-029c-4ca4-b417-2c4edcf67e25" defaultErrorHandler-ref="globalErrorHandlerError_Handler" />
+	<os:object-store name="Object_store" doc:name="Object store" doc:id="a61a5860-c331-4335-8cab-93f390cd742c" maxEntries="1000" entryTtl="15" entryTtlUnit="MINUTES" expirationInterval="10" />
+	<ee:object-store-caching-strategy name="Caching_Strategy" doc:name="Caching Strategy" doc:id="7ad52861-8699-4639-8922-8a1a10677d35" objectStore="Object_store" keyGenerationExpression='#[(vars.transportCompany) ++ (vars.transportType) ++ &#10;"Routes"]'/>
+	
+
+</mule>
