@@ -24,7 +24,7 @@ http://www.mulesoft.org/schema/mule/os http://www.mulesoft.org/schema/mule/os/cu
 	<global-property doc:name="Global Property" doc:id="62688334-7a07-4d7f-8a49-473310e557c3" name="MULE_ENV" value="local" />
 	<configuration doc:name="Configuration" doc:id="a9e66ad8-029c-4ca4-b417-2c4edcf67e25" defaultErrorHandler-ref="globalErrorHandlerError_Handler" />
 	<os:object-store name="Object_store" doc:name="Object store" doc:id="a61a5860-c331-4335-8cab-93f390cd742c" maxEntries="1000" entryTtl="15" entryTtlUnit="MINUTES" expirationInterval="10" />
-	<ee:object-store-caching-strategy name="Caching_Strategy" doc:name="Caching Strategy" doc:id="7ad52861-8699-4639-8922-8a1a10677d35" objectStore="Object_store" keyGenerationExpression='#[(vars.transportCompany) ++ (vars.transportType) ++ &#10;"Routes"]'/>
+	<ee:object-store-caching-strategy name="Caching_Strategy" doc:name="Caching Strategy" doc:id="7ad52861-8699-4639-8922-8a1a10677d35" objectStore="Object_store" keyGenerationExpression='#[(vars.transportCompany) ++ (vars.transportType) ++ &#10;vars.resource]'/>
 	
 
 </mule>

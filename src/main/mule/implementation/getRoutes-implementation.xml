@@ -72,7 +72,7 @@ payload map (value, index) ->payload map(value,index) ->
 				</ee:cache>
 	</sub-flow>
 	<sub-flow name="getRoutes-implementationSub_Flow" doc:id="0dec1f31-836e-4be1-a4e3-2cc329bd325b" >
-		<logger level="INFO" doc:name="Logger" doc:id="a464b537-e28d-438e-acb6-8da2e1a69e5f" />
+		<set-variable value="Routes" doc:name="Set Variable" doc:id="6a10e9c1-f75d-4194-8745-3ca030e9c020" variableName="resource"/>
 		<choice doc:name="Choice" doc:id="f09f6970-4214-4b90-afca-ddac6f53d12a" >
 			<when expression="#[vars.transportCompany == 'FastGo']">
 				<flow-ref doc:name="Flow Reference" doc:id="7d8ddb13-45c2-45ed-8f22-432454a4d957" name="GetRoutes-FastGo-Implementation" />
@@ -100,7 +100,6 @@ output application/json
 payload]]></ee:set-payload>
 					</ee:message>
 				</ee:transform>
-				<logger level="INFO" doc:name="Logger" doc:id="823bbf81-a9bf-4a9d-8691-31130949a2b7" message="#[(payload.'0'.payload default[]) ++ (payload.'1'.payload default[])]"/>
 				<set-payload value="#[%dw 2.0&#10;output application/json&#10;---&#10;(payload.'0'.payload default []) ++ (payload.'1'.payload default [])]" doc:name="Set Payload" doc:id="3443d840-62d3-4c31-af1f-6f1a9f5677a0" />
 			</otherwise>
 		</choice>
